@@ -5,15 +5,20 @@ export default class Inventory {
     this.id = randomIdGenerator();
     this._name = name;
     //Designed to hold a list of the InventoryItem class.
-    this.inventory = [];
+    this._inventory = [];
+  }
+
+  getInventory(){
+    return this._inventory;
   }
 
   addItem(inventoryItem){
-    this.inventory.push(inventoryItem);
+    //TODO implement validation
+    this._inventory.push(inventoryItem);
   }
 
   removeItem(inventoryItem){
-    this.inventory.splice(this.inventory.indexOf(inventoryItem), 1);
+    this._inventory.splice(this._inventory.indexOf(inventoryItem), 1);
   }
 }
 

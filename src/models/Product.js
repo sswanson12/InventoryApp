@@ -23,8 +23,8 @@ export default class Product {
 
   productCategoriesString() {
     let categoriesString = "";
-    for (let i = 0; i < this.product.getCategories().length; i++){
-      categoriesString += this.product.getCategories()[i] + ", ";
+    for (let i = 0; i < this._categories.length; i++){
+      categoriesString += this._categories[i] + ", ";
     }
     return categoriesString.substring(0, categoriesString.length - 3);
   }

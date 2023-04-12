@@ -90,10 +90,10 @@ export default {
   }),
   computed: {
     requiredStringRules: function () {
-      return [].push(...this.requiredRules, ...this.stringRules);
+      return [...this.requiredRules, ...this.stringRules];
     },
     requiredNumberRules: function () {
-      return [].push(...this.requiredRules, ...this.numberRules);
+      return [...this.requiredRules, ...this.numberRules];
     }
   }
 }

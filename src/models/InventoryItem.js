@@ -4,15 +4,15 @@ export default class InventoryItem {
   constructor(product, quantity) {
     this.id = randomIdGenerator();
     this.product = product;
-    this._quantity = quantity;
+    this.quantity = quantity;
   }
 
   setQuantity(quantity){
     if (isNaN(quantity)){
       return false;
     } else {
-      this._quantity = quantity;
-      return this._quantity;
+      this.quantity = quantity;
+      return this.quantity;
     }
   }
 
@@ -20,8 +20,8 @@ export default class InventoryItem {
     if (isNaN(quantity)){
       return false;
     } else {
-      this._quantity += quantity;
-      return this._quantity;
+      this.quantity += quantity;
+      return this.quantity;
     }
   }
 
@@ -29,8 +29,8 @@ export default class InventoryItem {
     if (isNaN(quantity)){
       return false;
     } else {
-      this._quantity -= quantity;
-      return this._quantity;
+      this.quantity -= quantity;
+      return this.quantity;
     }
   }
 }
