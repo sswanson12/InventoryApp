@@ -26,7 +26,12 @@ export default class Product {
     for (let i = 0; i < this._categories.length; i++){
       categoriesString += this._categories[i] + ", ";
     }
-    return categoriesString.substring(0, categoriesString.length - 3);
+    return categoriesString.substring(0, categoriesString.length - 2);
+  }
+
+  clearCategories(){
+    this._categories = [];
+    return this._categories;
   }
 
   addCategory(category){

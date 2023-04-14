@@ -9,21 +9,9 @@
   </app-button>
   <header class="font-weight-medium appModalHeader">{{modalTitle}}</header>
   <v-form>
-    <div v-for="requiredInput in requiredInputs">
-      <v-input v-if="requiredInput.inputType === 'string'" v-model="requiredInput.inputName" :rules="requiredStringRules"></v-input>
-      <v-input v-else-if="requiredInput.inputType === 'number'" v-model="requiredInput.inputName" :rules="requiredNumberRules"></v-input>
-    </div>
-    <div v-for="input in inputs">
-      <v-input v-if="input.inputType === 'string'" v-model="input.inputName" :rules="stringRules"></v-input>
-      <v-input v-else-if="input.inputType === 'number'" v-model="input.inputName" :rules="numberRules"></v-input>
-    </div>
-    <div v-for="dropdownInput in dropdownInputs">
-      <v-select
-        :label="dropdownInput.name"
-        :items="dropdownInput.selections"
-        multiple
-      ></v-select>
-    </div>
+    <slot>
+      //All Inputs will come from a more specific modal component.
+    </slot>
     <div class="d-flex flex-column">
       <app-button button-text="Submit&nbsp"
                   icon="mdi-pencil"
@@ -49,58 +37,45 @@ import randomIdGenerator from "@/models/utilities/randomIdGenerator";
 
 export default {
   name: "AppModal",
+  emits: ["close-modal", "submit-form", "clear-form"],
   components: { AppButton, },
   props: {
     modalTitle: {
       type: String,
       required: true,
     },
-    requiredInputs: {
-      type: Array,
-    },
-    inputs: {
-      type: Array,
-    },
-    dropdownInputs: {
-      type: Array,
-    }
   },
   methods: {
+    //must be picked up by the component implementing this component
     closeModal() {
-      this.$emit("close-modal", 'modal' + this.modalId)
+      this.$emit("close-modal")
     },
     submitForm() {
-      //TODO submit form function
+      this.$emit("submit-form");
     },
     clearForm() {
-      //TODO clear form function
+      this.$emit("clear-form");
     },
   },
   data: () => ({
     modalId: randomIdGenerator(),
-    requiredRules: [
-      value => !!value || 'Required.',
-    ],
-    stringRules: [
-      value => (value.typeof === inputTypes.STRING) || 'Must be a string value.'
-    ],
-    numberRules: [
-      value => (value.typeof === inputTypes.NUMBER) || 'Must be a number value.'
-    ],
   }),
-  computed: {
-    requiredStringRules: function () {
-      return [...this.requiredRules, ...this.stringRules];
-    },
-    requiredNumberRules: function () {
-      return [...this.requiredRules, ...this.numberRules];
-    }
-  }
 }
 </script>
 
 <style scoped>
 .appModal{
-
+  width: 340px;
+  padding: 20px;
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.appModalHeader{
+  position: relative;
+  text-align: center;
+  bottom: 8px;
 }
 </style>

@@ -1,44 +1,39 @@
 <template>
-  <div>
-    <v-card :id="'inventoryItem-' + inventoryItem.id" class="inventoryItem">
-      <v-card-title>{{inventoryItem.product.name}}</v-card-title>
-      <v-card-subtitle>{{inventoryItem.product.productCategoriesString()}}</v-card-subtitle>
-      <v-card-text>
-        <div>{{inventoryItem.product.description}}</div>
-        <div>{{inventoryItem.quantity}}</div>
-      </v-card-text>
-      <v-card-actions class="d-flex justify-center">
-        <app-button :id="'editButton-' + inventoryItem.id"
-                    icon="mdi-pencil"
-                    tool-tip="Edit"
-                    tool-tip-location="bottom"
-                    :button-action="editItem">
-        </app-button>
-        <app-button :id="'deleteButton-' + inventoryItem.id"
-                    icon="mdi-delete"
-                    tool-tip="Delete"
-                    tool-tip-location="bottom"
-                    :button-action="deleteItem">
-        </app-button>
-      </v-card-actions>
-    </v-card>
-    <app-modal :modal-title="'Editing -' + inventoryItem.product.name"
-               :required-inputs="requiredInputs"
-               :inputs="nonRequiredInputs"
-    ></app-modal>
-  </div>
+  <v-card :id="'inventoryItem-' + inventoryItem.id" class="inventoryItem">
+    <v-card-title>{{inventoryItem.product.name}}</v-card-title>
+    <v-card-subtitle>{{inventoryItem.product.productCategoriesString()}}</v-card-subtitle>
+    <v-card-text>
+      <div class="quantity">In stock: {{inventoryItem.quantity}}</div>
+      <div>{{inventoryItem.product.description}}</div>
+    </v-card-text>
+    <v-card-actions class="d-flex justify-center">
+      <app-button :id="'editButton-' + inventoryItem.id"
+                  icon="mdi-pencil"
+                  tool-tip="Edit"
+                  tool-tip-location="bottom"
+                  :button-action="editItem">
+      </app-button>
+      <app-button :id="'deleteButton-' + inventoryItem.id"
+                  icon="mdi-delete"
+                  tool-tip="Delete"
+                  tool-tip-location="bottom"
+                  :button-action="deleteItem">
+      </app-button>
+    </v-card-actions>
+<!--    <edit-modal :inventory-item="inventoryItem"></edit-modal>-->
+  </v-card>
 </template>
 
 <script>
 import InventoryItem from "@/models/InventoryItem";
 import AppButton from "@/components/utility/AppButton";
 import AppModal from "@/components/utility/AppModal";
-import {StringInputModel} from "@/models/utilities/AppModalInputModel";
+import EditModal from "@/components/EditModal";
 
 export default {
   name: "InventoryItem",
   emits: ["delete-item"],
-  components: { AppButton, AppModal},
+  components: {EditModal, AppButton, AppModal},
   props: {
     inventoryItem: {
       type: InventoryItem,
@@ -47,20 +42,12 @@ export default {
   },
   methods: {
     editItem: function() {
-      //TODO
+      this.$emit("edit-item", this.inventoryItem);
     },
     deleteItem: function() {
-      //TODO
+      this.$emit("delete-item", this.inventoryItem);
     }
   },
-  data: function() {
-    return{
-      requiredInputs: [new StringInputModel()],
-      nonRequiredInputs: {
-
-      },
-    }
-  }
 }
 </script>
 
@@ -69,4 +56,9 @@ export default {
 
 }
 
+.quantity{
+  margin-top: -10px;
+  margin-bottom: 5px;
+  font-size: smaller
+}
 </style>
