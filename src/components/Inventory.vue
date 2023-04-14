@@ -49,7 +49,6 @@ import InventoryItem from "@/components/InventoryItem";
 import Inventory from "@/models/Inventory";
 import AppButton from "@/components/utility/AppButton";
 import {productCategoriesArray} from "@/models/data/initData";
-import { toRaw } from 'vue';
 
 export default {
   name: "Inventory",

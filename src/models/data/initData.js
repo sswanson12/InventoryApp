@@ -14,14 +14,15 @@ export let productCategories = { AUTOMOTIVE : "Automotive & Motorsports", APPARE
                           HOMEIMPROVEMENT : "Home Improvement", TOOLS : "Tools", TOYSANDGAMES : "Toys & Games",
                           VIDEO : "Video, DVD & Blu-ray", VIDEOGAMES : "Video Games", WATCHES : "Watches" };
 
-export let productCategoriesArray = ['Automotive & Motorsports', 'Clothing & Apparel', 'Baby',
-  'Beauty', 'Books', 'Camera & Photo', 'Cell Phones & Accessories',
-  'Electronics', 'Collectibles', 'Fine Art', 'Grocery & Gourmet Foods',
-  'Health & Personal Care', 'Home & Garden', 'Major Appliances',
-  'Music', 'Musical Instruments', 'Office', 'Outdoors',
-  'Personal Computers', 'Pet Supplies', 'Software', 'Sports',
-  'Home Improvement', 'Tools', 'Toys & Games',
-  'Video, DVD & Blu-ray', 'Video Games', 'Watches']
+export let productCategoriesArray = [ productCategories.AUTOMOTIVE, productCategories.APPAREL, productCategories.BABY,
+  productCategories.BEAUTY, productCategories.BOOKS, productCategories.PHOTOGRAPHY, productCategories.MOBILE,
+  productCategories.ELECTRONICS, productCategories.COLLECTIBLE, productCategories.ART, productCategories.GROCERY,
+  productCategories.HEALTH, productCategories.HOMEANDGARDEN, productCategories.APPLIANCE, productCategories.MUSIC,
+  productCategories.INSTRUMENT, productCategories.OFFICE, productCategories.OUTDOORS, productCategories.COMPUTER,
+  productCategories.PETSUPPLY, productCategories.SOFTWARE, productCategories.SPORTS, productCategories.HOMEIMPROVEMENT,
+  productCategories.TOOLS, productCategories.TOYSANDGAMES, productCategories.VIDEO, productCategories.VIDEOGAMES,
+  productCategories.WATCHES,
+]
 
 export let inputTypes = { STRING : "string", NUMBER: "number", DROPDOWN: "dropdown" };
 
