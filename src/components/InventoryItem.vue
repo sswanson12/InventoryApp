@@ -20,20 +20,17 @@
                   :button-action="deleteItem">
       </app-button>
     </v-card-actions>
-<!--    <edit-modal :inventory-item="inventoryItem"></edit-modal>-->
   </v-card>
 </template>
 
 <script>
 import InventoryItem from "@/models/InventoryItem";
 import AppButton from "@/components/utility/AppButton";
-import AppModal from "@/components/utility/AppModal";
-import EditModal from "@/components/EditModal";
 
 export default {
   name: "InventoryItem",
   emits: ["delete-item"],
-  components: {EditModal, AppButton, AppModal},
+  components: {AppButton},
   props: {
     inventoryItem: {
       type: InventoryItem,

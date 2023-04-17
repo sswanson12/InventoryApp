@@ -38,8 +38,23 @@
                 class="filter-sort-search-button">
     </app-button>
   </div>
-  <div class="item-container">
-    <inventory-item @delete-item="deleteItem" class="inventory-item" v-for="inventoryItem in currentlyShownSongs" :inventory-item="inventoryItem"></inventory-item>
+
+  <div v-for="inventoryItem in currentlyShownItems">
+    <div class="item-container">
+      <inventory-item @delete-item="deleteItem" @edit-item="openEditModal" class="inventory-item" :inventory-item="inventoryItem"></inventory-item>
+    </div>
+    <edit-modal :inventory-item="inventoryItem"></edit-modal>
+  </div>
+
+  <div class="addItemButtonContainer">
+    <app-button class="bg-primary rounded-circle d-block float-end"
+                icon="mdi-plus"
+                button-size="xxx-large"
+                tool-tip="Add new inventory items!"
+                tool-tip-location="left"
+                :button-action="openAddItemModal">
+    </app-button>
+    <add-item-modal></add-item-modal>
   </div>
 </v-sheet>
 </template>
@@ -49,10 +64,12 @@ import InventoryItem from "@/components/InventoryItem";
 import Inventory from "@/models/Inventory";
 import AppButton from "@/components/utility/AppButton";
 import {productCategoriesArray} from "@/models/data/initData";
+import EditModal from "@/components/EditModal";
+import AddItemModal from "@/components/AddItemModal";
 
 export default {
   name: "Inventory",
-  components: { InventoryItem, AppButton },
+  components: {EditModal, InventoryItem, AppButton, AddItemModal },
   props: {
     inventory: {
       type: Inventory,
@@ -80,10 +97,17 @@ export default {
       console.log('Removing item: ', item);
       this.inventory.removeItem(item);
       this.shownItems = [...this.inventory.getInventory()];
+    },
+    openEditModal(item){
+      console.log('Editing item: ', item);
+      document.getElementById('editModal' + item.id).style.display = "block";
+    },
+    openAddItemModal(){
+      document.getElementById('addItemModal').style.display = "block";
     }
   },
   computed: {
-    currentlyShownSongs(){
+    currentlyShownItems(){
       return this.shownItems.filter((item) => {
         return item.product.name.toLowerCase().includes(this.searchString.toLowerCase())
           || item.product.description.toLowerCase().includes(this.searchString.toLowerCase());
@@ -139,14 +163,20 @@ export default {
 
 .item-container{
   display: flex;
-  flex-flow: wrap row;
   justify-content: center;
+  flex-flow: nowrap row;
+}
+
+.addItemButtonContainer{
+  position: fixed;
+  right: 1vw;
+  top: 10vh;
+  margin-right: 5px;
 }
 
 .inventory-item{
   height: fit-content;
   width: 400px;
-  flex-flow: nowrap row;
   margin: 10px;
   z-index: 0;
 }
